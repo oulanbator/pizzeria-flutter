@@ -31,6 +31,8 @@ dependencies:
     sdk: flutter
   provider: ^6.0.0
   http: 0.13.4
+  url_launcher: ^6.0.0
+  font_awesome_flutter: ^9.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,6 +66,7 @@ flutter:
   assets:
     - assets/images/menus/
     - assets/images/pizzas/
+    - assets/images/profil/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
