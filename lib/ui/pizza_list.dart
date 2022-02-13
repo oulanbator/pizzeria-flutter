@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pizzeria/models/cart.dart';
 import 'package:pizzeria/models/pizza.dart';
@@ -20,10 +18,8 @@ class PizzaList extends StatefulWidget {
 }
 
 class _PizzaListState extends State<PizzaList> {
-  // la liste de pizzas
-  // List<Pizza> _pizzas = [];
   late Future<List<Pizza>> _pizzas;
-  PizzeriaService _service = PizzeriaService();
+  final PizzeriaService _service = PizzeriaService();
 
   @override
   void initState() {
@@ -35,7 +31,7 @@ class _PizzaListState extends State<PizzaList> {
     var cart = context.watch<Cart>();
 
     return Scaffold(
-      appBar: AppBarWidget('Nos Pizzas'),
+      appBar: const AppBarWidget('Nos Pizzas'),
       body: FutureBuilder<List<Pizza>>(
           future: _pizzas,
           builder: (context, snapshot) {
@@ -49,10 +45,10 @@ class _PizzaListState extends State<PizzaList> {
                 ),
               );
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(1),
+      bottomNavigationBar: const BottomNavigationBarWidget(1),
     );
   }
 
@@ -77,7 +73,7 @@ class _PizzaListState extends State<PizzaList> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: () {
               Navigator.push(
                   context,

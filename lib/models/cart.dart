@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pizzeria/models/pizza.dart';
+import 'package:pizzeria/models/produit.dart';
 
 class CartItem {
-  final Pizza pizza;
+  final Produit produit;
   int quantity;
 
-  CartItem(this.pizza, [this.quantity = 1]);
+  CartItem(this.produit, [this.quantity = 1]);
 }
 
 class Cart extends ChangeNotifier {
@@ -19,12 +20,12 @@ class Cart extends ChangeNotifier {
     return _items[index];
   }
 
-  void addProduct(Pizza pizza) {
+  void addProduct(Produit produit) {
     // Recherche du produit
-    int index = _findCartItemIndex(pizza.id);
+    int index = _findCartItemIndex(produit.id);
     if (index == -1) {
       // Ajout
-      _items.add(CartItem(pizza));
+      _items.add(CartItem(produit));
     } else {
       // Incrémente la quantité
       CartItem item = _items[index];
@@ -33,9 +34,9 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeProduct(Pizza pizza) {
+  void removeProduct(Produit produit) {
     // Recherche du produit
-    int index = _findCartItemIndex(pizza.id);
+    int index = _findCartItemIndex(produit.id);
     if (index != -1) {
       // Suppression
       _items.removeAt(index);
@@ -44,23 +45,23 @@ class Cart extends ChangeNotifier {
   }
 
   int _findCartItemIndex(int id) {
-    return _items.indexWhere((element) => element.pizza.id == id);
+    return _items.indexWhere((element) => element.produit.id == id);
   }
 
   void removeOne(CartItem item) {
-    int index = _findCartItemIndex(item.pizza.id);
+    int index = _findCartItemIndex(item.produit.id);
     int quantity = getCartItem(index).quantity;
     if (quantity > 0) {
       getCartItem(index).quantity -= 1;
     }
     if (getCartItem(index).quantity == 0) {
-      removeProduct(item.pizza);
+      removeProduct(item.produit);
     }
     notifyListeners();
   }
 
   void addOne(CartItem item) {
-    int index = _findCartItemIndex(item.pizza.id);
+    int index = _findCartItemIndex(item.produit.id);
     getCartItem(index).quantity += 1;
     notifyListeners();
   }

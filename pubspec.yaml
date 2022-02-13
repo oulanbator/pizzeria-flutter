@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/images/menus/
     - assets/images/pizzas/
+    - assets/images/boissons/
     - assets/images/profil/
   #   - images/a_dot_ham.jpeg
 

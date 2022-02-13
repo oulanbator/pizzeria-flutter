@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pizzeria/models/boisson.dart';
 import 'package:pizzeria/models/cart.dart';
+import 'package:pizzeria/models/pizza.dart';
 import 'package:pizzeria/ui/share/pizzeria_style.dart';
 import 'package:provider/src/provider.dart';
 import 'package:intl/intl.dart';
@@ -22,15 +24,26 @@ class CartList extends StatelessWidget {
 
   /// Builder for one item. Based on a Card widget.
   _buildItem(BuildContext context, CartItem item) {
+    // Defining path to retrieve image based on product type
+    String image_path = "";
+    if (item.produit.runtimeType == Pizza) {
+      image_path =  "assets/images/pizzas/";
+    } else if (item.produit.runtimeType == Boisson) {
+      image_path =  "assets/images/boissons/";
+    }
+    // Return card
     return Card(
         shape: _itemCardShape(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              'assets/images/pizzas/${item.pizza.image}',
-              height: 100,
-              fit: BoxFit.fitHeight,
+            SizedBox(
+              width: 100,
+              child: Image.asset(
+                (image_path + item.produit.image),
+                height: 100,
+                fit: BoxFit.fitHeight,
+              ),
             ),
             _buildItemDetails(context, item)
           ],
@@ -74,7 +87,7 @@ class CartList extends StatelessWidget {
   /// The item title
   _itemTitle(CartItem item) {
     return Text(
-        item.pizza.title,
+        item.produit.title,
         style: PizzeriaStyle.headerTextStyle
     );
   }
@@ -82,7 +95,7 @@ class CartList extends StatelessWidget {
   /// The row with selection of quantity
   _itemQuantitySelection(BuildContext context, CartItem item) {
     var format = NumberFormat("###.00 €");
-    String totalAffiche = format.format(item.pizza.total);
+    String totalAffiche = format.format(item.produit.total);
 
     return Row(
       children: [
@@ -124,7 +137,7 @@ class CartList extends StatelessWidget {
   /// Item total relative to quantity
   _itemTotal(CartItem item) {
     var format = NumberFormat("###.00 €");
-    String totalAffiche = format.format(item.pizza.total * item.quantity);
+    String totalAffiche = format.format(item.produit.total * item.quantity);
 
     return item.quantity > 0 ?
     Text(

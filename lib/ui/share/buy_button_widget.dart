@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pizzeria/models/cart.dart';
 import 'package:pizzeria/models/pizza.dart';
+import 'package:pizzeria/models/produit.dart';
 import 'package:provider/provider.dart';
 
 class BuyButtonWidget extends StatelessWidget {
-  final Pizza _pizza;
+  // final Pizza _pizza;
+  final Produit _produit;
 
-  const BuyButtonWidget(this._pizza, {Key? key}) : super(key: key);
+  const BuyButtonWidget(this._produit, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +21,7 @@ class BuyButtonWidget extends StatelessWidget {
       children: [
         ElevatedButton(
             onPressed: () {
-              print('Commander une pizza');
-              _cart.addProduct(_pizza);
+              _cart.addProduct(_produit);
             },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade800)

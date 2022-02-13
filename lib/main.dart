@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizzeria/models/cart.dart';
 import 'package:pizzeria/models/menu.dart';
+import 'package:pizzeria/ui/boisson_list.dart';
 import 'package:pizzeria/ui/panier.dart';
 import 'package:pizzeria/ui/pizza_list.dart';
 import 'package:pizzeria/ui/profil.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(title: 'Notre pizzéria'),
         '/commande': (context) => PizzaList(),
         '/panier': (context) => Panier(),
-        '/profil': (context) => Profil()
+        '/profil': (context) => Profil(),
+        '/boissons': (context) => BoissonList(),
       },
     );
   }
@@ -61,14 +63,24 @@ class MyHomePage extends StatelessWidget {
           itemCount: _menus.length,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
+              String page = "/";
               switch(_menus[index].type) {
                 case 2: // Pizza
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => PizzaList())
-                  );
+                  page = "/commande";
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => PizzaList())
+                  // );
+                  break;
+                case 4: // Boisson
+                  page = "/boissons";
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => PizzaList())
+                  // );
                   break;
               }
+              Navigator.pushNamed(context, page);
             },
             child: _buildRow(_menus[index]),
           ),

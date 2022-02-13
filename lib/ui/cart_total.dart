@@ -16,7 +16,7 @@ class CartTotal extends StatelessWidget {
 
     for (int i = 0 ; i < cart.totalItems() ; i++) {
       var item = cart.getCartItem(i);
-      var itemTotal = (item.pizza.price * item.quantity);
+      var itemTotal = (item.produit.price * item.quantity);
       totalTtc += itemTotal;
     }
 

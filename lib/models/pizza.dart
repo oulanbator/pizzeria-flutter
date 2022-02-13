@@ -1,6 +1,7 @@
 import 'package:pizzeria/models/option_item.dart';
+import 'package:pizzeria/models/produit.dart';
 
-class Pizza {
+class Pizza implements Produit {
   final int id;
   final String title;
   final String garniture;
