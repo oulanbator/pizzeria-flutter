@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pizzeria/models/cart.dart';
-
-import '../panier.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -15,18 +12,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      // actions: [
-      //   IconButton(
-      //       onPressed: () {
-      //           Navigator.push(context, MaterialPageRoute(
-      //             builder: (context) => Panier()
-      //           ));
-      //       },
-      //       icon: const Icon(
-      //           Icons.shopping_cart
-      //       )
-      //   )
-      // ],
     );
   }
 }

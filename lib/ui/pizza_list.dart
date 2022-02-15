@@ -77,7 +77,7 @@ class _PizzaListState extends State<PizzaList> {
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PizzaDetails(pizza, cart)));
+                  MaterialPageRoute(builder: (context) => PizzaDetails(pizza)));
             },
             child: _buildPizzaDetails(pizza),
           ),
@@ -102,10 +102,6 @@ class _PizzaListState extends State<PizzaList> {
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.fitWidth,
         ),
-        Container(
-          padding: const EdgeInsets.all(4.0),
-          child: Text(pizza.garniture),
-        )
       ],
     );
   }

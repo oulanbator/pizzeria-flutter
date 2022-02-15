@@ -10,9 +10,8 @@ import 'package:pizzeria/ui/share/total_widget.dart';
 class PizzaDetails extends StatefulWidget {
 
   final Pizza _pizza;
-  final Cart _cart;
 
-  PizzaDetails(this._pizza, this._cart, {Key? key}) : super(key: key);
+  PizzaDetails(this._pizza, {Key? key}) : super(key: key);
 
   @override
   _PizzaDetailsState createState() => _PizzaDetailsState();

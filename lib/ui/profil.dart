@@ -1,46 +1,47 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizzeria/models/user_profile.dart';
+import 'package:pizzeria/ui/profil_edit.dart';
 import 'package:pizzeria/ui/share/appbar_widget.dart';
 import 'package:pizzeria/ui/share/bottom_navigation_bar_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Profil extends StatelessWidget {
-  const Profil({Key? key}) : super(key: key);
+  // final UserProfile user = UserProfile();
+
+  Profil({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String imagePath = "assets/images/profil/vm.jpg";
-    String name = "Victor";
-    String email = "victor.matheron@gmail.com";
-    String about = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-
+    var user = context.watch<UserProfile>();
     return Scaffold(
       appBar: const AppBarWidget("Mon profil"),
       body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          const SizedBox(height: 30.0),
-          _buildHeader(imagePath),
-          const SizedBox(height: 24.0),
-          _buildSubHeader(name, email),
-          const SizedBox(height: 24.0),
-          Center(child: _buildFollowButton()),
-          const SizedBox(height: 48.0),
-          _buildAbout(about),
-        ],
-      ),
+          physics: const BouncingScrollPhysics(),
+          children: [
+            const SizedBox(height: 30.0),
+            _buildHeader(user.image, context),
+            const SizedBox(height: 24.0),
+            _buildSubHeader(user.nom, user.email),
+            const SizedBox(height: 24.0),
+            Center(child: _buildFollowButton()),
+            const SizedBox(height: 48.0),
+            _buildAbout(user.description),
+          ],
+        ),
       bottomNavigationBar: const BottomNavigationBarWidget(3),
     );
   }
 
-  _buildHeader(String imagePath) {
+  _buildHeader(String imagePath, BuildContext context) {
     return Center(
       child: Stack(
         children: [
           _buildImage(imagePath),
           Positioned(
-            child: _buildEditButton(Colors.blue),
+            child: _buildEditButton(Colors.blue, context),
             bottom: 10,
             right: 10,
           )
@@ -62,19 +63,24 @@ class Profil extends StatelessWidget {
     ));
   }
 
-  _buildEditButton(Color color) {
-    return _buildCircle(
-      color: Colors.white,
-      all: 3,
+  _buildEditButton(Color color, BuildContext context) {
+    return GestureDetector(
+      onTap: () => {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilEdit()))
+      },
       child: _buildCircle(
-          color: color,
-          all: 8,
-          child: const Icon(
-            Icons.edit,
-            color: Colors.white,
-            size: 20,
+          color: Colors.white,
+          all: 3,
+          child: _buildCircle(
+              color: color,
+              all: 8,
+              child: const Icon(
+                Icons.edit,
+                color: Colors.white,
+                size: 20,
+              )
           )
-      )
+      ),
     );
   }
 

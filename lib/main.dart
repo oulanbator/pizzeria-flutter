@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizzeria/models/cart.dart';
 import 'package:pizzeria/models/menu.dart';
+import 'package:pizzeria/models/user_profile.dart';
 import 'package:pizzeria/ui/boisson_list.dart';
 import 'package:pizzeria/ui/panier.dart';
 import 'package:pizzeria/ui/pizza_list.dart';
@@ -11,10 +12,17 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-        create: (context) => Cart(),
-        child: MyApp(),
-    ),
+    // ChangeNotifierProvider(
+    //   create: (context) => Cart(),
+    //   child: MyApp(),
+    // ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Cart()),
+        ChangeNotifierProvider(create: (context) => UserProfile())
+      ],
+      child: MyApp(),
+    )
   );
 }
 
@@ -24,19 +32,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pizzéria',
+      title: 'Pizza Napoli',
       theme: ThemeData(
         // This is the theme of your application.
         primarySwatch: Colors.lightGreen,
       ),
       initialRoute: "/",
       routes: {
-        '/': (context) => MyHomePage(title: 'Notre pizzéria'),
+        '/': (context) => MyHomePage(title: 'Pizza Napoli'),
         '/commande': (context) => PizzaList(),
         '/panier': (context) => Panier(),
         '/profil': (context) => Profil(),
         '/boissons': (context) => BoissonList(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -48,10 +57,10 @@ class MyHomePage extends StatelessWidget {
       : super(key: key);
 
   final List<Menu> _menus = [
-    Menu(1, 'Entrées', 'entree.png', Colors.lightGreen),
-    Menu(2, 'Pizzas', 'pizza.png', Colors.redAccent),
-    Menu(3, 'Desserts', 'dessert.png', Colors.brown),
-    Menu(4, 'Boissons', 'boisson.png', Colors.lightBlue)
+    Menu(1, 'Entrées', 'entree.png', Colors.lightGreen.shade200),
+    Menu(2, 'Pizzas', 'pizza.png', Colors.redAccent.shade100),
+    Menu(3, 'Desserts', 'dessert.png', Colors.brown.shade100),
+    Menu(4, 'Boissons', 'boisson.png', Colors.lightBlue.shade100)
   ];
 
   @override
@@ -67,22 +76,15 @@ class MyHomePage extends StatelessWidget {
               switch(_menus[index].type) {
                 case 2: // Pizza
                   page = "/commande";
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => PizzaList())
-                  // );
                   break;
                 case 4: // Boisson
                   page = "/boissons";
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => PizzaList())
-                  // );
                   break;
               }
               Navigator.pushNamed(context, page);
             },
-            child: _buildRow(_menus[index]),
+            child: _buildRow(_menus[index]
+            ),
           ),
           itemExtent: 180
         )
@@ -96,9 +98,9 @@ class MyHomePage extends StatelessWidget {
       height: 180,
       decoration: BoxDecoration(
           color: menu.color,
-          borderRadius: const BorderRadius.all(Radius.circular(20.0))
+          borderRadius: const BorderRadius.all(Radius.circular(10.0))
       ),
-      margin: const EdgeInsets.all(4.0),
+      margin: const EdgeInsets.all(2.0),
       child: Column(
         children: [
           Expanded(

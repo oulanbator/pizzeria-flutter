@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pizzeria/models/pizza.dart';
 import 'package:pizzeria/models/produit.dart';
 
 class CartItem {
