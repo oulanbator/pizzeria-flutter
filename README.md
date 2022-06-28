@@ -1,16 +1,13 @@
-# pizzeria
+# Pizzeria - Application Mobile
 
-Notre Pizzeria
+Projet d'application mobile pour une pizzeria. Les vues principales ont été développées :
+- Choix des pizzas
+- Choix des boissons
+- Détail d'un pizza et d'une boisson
+- Panier
+- Dernière étape avant règlement de la commande
+- Profil
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+L'application a besoin d'une API pour fonctionner : voir pizzeria_service.dart
+Celle ci a été développée en Java et tourne en local à des fins de développement.
+Elle n'est pas intégrée dans ce projet.
